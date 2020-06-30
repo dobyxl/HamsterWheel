@@ -25,6 +25,11 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "Idle",
@@ -44,11 +49,6 @@ animations = [ {
 "loop": true,
 "name": "Run",
 "speed": 15.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -179,7 +179,7 @@ position = Vector2( 250.542, 439.58 )
 shape = SubResource( 5 )
 
 [node name="NorthEastWall" type="CollisionShape2D" parent="CageBoundaries"]
-position = Vector2( 548.761, 437.478 )
+position = Vector2( 548.761, 438.538 )
 shape = SubResource( 6 )
 
 [node name="SouthWall" type="CollisionShape2D" parent="CageBoundaries"]

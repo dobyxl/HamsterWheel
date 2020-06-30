@@ -9,13 +9,14 @@ const SPEED_CAP = 100
 var apm = []
 var motion = Vector2()
 var hamSpeed = 0
+var wheelSpeed = 0
 var hamIndex = 0
 var hamPos = Vector2()
 var onWheel = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(200):
+	for i in range(600):
 		apm.append(0)
 	pass
 
@@ -56,8 +57,6 @@ func _wheel_physics_process():
 	apm.pop_back()
 		
 	if Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
-		($AnimatedSprite as AnimatedSprite).scale.x = 1
-		motion.x = -SPEED
 		apm.push_front(1)
 	else:
 		apm.push_front(0)
@@ -67,10 +66,17 @@ func _wheel_physics_process():
 		$AnimatedSprite.play("IdleInWheel")
 	else:
 		$AnimatedSprite.play("Run")
+	
+	hamSpeed = apm.slice(0, 29, 1).count(1)
+	wheelSpeed = apm.count(1)/20
+	
+	if hamSpeed > wheelSpeed:
+		motion.x = -SPEED/4
+		wheelSpeed = (wheelSpeed+hamSpeed)/2
+	elif hamSpeed < wheelSpeed:
+		motion.x = SPEED
 		
 	motion = move_and_slide(motion, UP)
-	
-	hamSpeed = apm.count(1)
 	
 	self.set_global_rotation(-(self.get_position().x - 400)/69)
 
@@ -94,6 +100,6 @@ func _on_pressed_e_again():
 func is_On_Wheel():
 	return onWheel
 	
-func get_hamSpeed():
-	return hamSpeed
+func get_wheelSpeed():
+	return wheelSpeed
 	
