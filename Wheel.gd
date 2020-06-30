@@ -9,5 +9,5 @@ var hamIndex = 0
 func _process(delta):
 	if self.get_parent().get_node("Hamster").is_On_Wheel():
 		hamIndex =  log(self.get_parent().get_node("Hamster").get_wheelSpeed()+1)
-		self.get_node("Sprite2").rotate(-hamIndex/30)
+		self.get_node("Sprite2").rotate(-hamIndex/25)
 	pass

@@ -13,6 +13,9 @@ var wheelSpeed = 0
 var hamIndex = 0
 var hamPos = Vector2()
 var onWheel = false
+var leftKeyNext = true
+var eject = false
+var first = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,8 +24,10 @@ func _ready():
 	pass
 
 
-func _physics_process(delta):
-	if onWheel:
+func _physics_process(_delta):
+	if eject:
+		_eject_physics_process()
+	elif onWheel:
 		_wheel_physics_process()
 	else:
 		_default_physics_process()
@@ -56,10 +61,20 @@ func _wheel_physics_process():
 	motion.y += GRAVITY
 	apm.pop_back()
 		
-	if Input.is_action_just_pressed("ui_left") and not Input.is_action_pressed("ui_right"):
-		apm.push_front(1)
-	else:
-		apm.push_front(0)
+	if leftKeyNext:
+		if Input.is_action_just_pressed("ui_left"):
+			leftKeyNext = !leftKeyNext
+			apm.push_front(1)
+		else:
+			apm.push_front(0)
+	else: 
+		if Input.is_action_just_pressed("ui_right"):
+			leftKeyNext = !leftKeyNext
+			apm.push_front(1)
+		else:
+			apm.push_front(0)
+	
+	
 		
 	
 	if hamSpeed == 0:
@@ -71,15 +86,26 @@ func _wheel_physics_process():
 	wheelSpeed = apm.count(1)/20
 	
 	if hamSpeed > wheelSpeed:
-		motion.x = -SPEED/4
+		motion.x = -SPEED/2
 		wheelSpeed = (wheelSpeed+hamSpeed)/2
 	elif hamSpeed < wheelSpeed:
 		motion.x = SPEED
 		
-	motion = move_and_slide(motion, UP)
+	motion = move_and_slide(motion, UP, true)
 	
 	self.set_global_rotation(-(self.get_position().x - 400)/69)
 
+	pass
+	
+func _eject_physics_process():
+	if first:
+		motion.y -= 820
+		first = false
+	motion.x = 120
+	$AnimatedSprite.play("Jump")
+	motion.y += GRAVITY
+	self.rotate(0.1)
+	motion = move_and_slide(motion, UP)
 	pass
 
 
@@ -103,3 +129,8 @@ func is_On_Wheel():
 func get_wheelSpeed():
 	return wheelSpeed
 	
+
+
+func _on_Area2D_body_entered(_body):
+	eject = true
+	pass # Replace with function body.
