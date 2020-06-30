@@ -1,25 +1,27 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://assets/images/half.png" type="Texture" id=1]
-[ext_resource path="res://assets/images/wheel.png" type="Texture" id=2]
-[ext_resource path="res://PressE.gd" type="Script" id=3]
-[ext_resource path="res://Hamster.gd" type="Script" id=4]
-[ext_resource path="res://Wheel.gd" type="Script" id=5]
-[ext_resource path="res://assets/images/Hamster/HamsterGroundWalking2.png" type="Texture" id=6]
-[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning4.png" type="Texture" id=7]
-[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning1.png" type="Texture" id=8]
-[ext_resource path="res://assets/images/HamsterGameBG.png" type="Texture" id=9]
-[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning6.png" type="Texture" id=10]
-[ext_resource path="res://assets/images/Hamster/HamsterInWheelIdle.png" type="Texture" id=11]
+[ext_resource path="res://HamsterCage.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/HamsterGameBGFrontPanel.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/HamsterGameBGNoPain.png" type="Texture" id=3]
+[ext_resource path="res://Wheel.gd" type="Script" id=4]
+[ext_resource path="res://assets/images/half.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/SpinningWheel.png" type="Texture" id=6]
+[ext_resource path="res://Hamster.gd" type="Script" id=7]
+[ext_resource path="res://assets/images/Hamster/HamsterGroundIdle1.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/Hamster/HamsterInWheelIdle.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/Hamster/HamsterJumping.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning1.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning2.png" type="Texture" id=12]
-[ext_resource path="res://assets/images/Hamster/HamsterGroundIdle1.png" type="Texture" id=13]
-[ext_resource path="res://assets/images/Hamster/HamsterGroundWalking3.png" type="Texture" id=14]
+[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning3.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning4.png" type="Texture" id=14]
 [ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning5.png" type="Texture" id=15]
-[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning3.png" type="Texture" id=16]
-[ext_resource path="res://assets/images/Hamster/HamsterJumping.png" type="Texture" id=17]
-[ext_resource path="res://assets/fonts/kongtext.ttf" type="DynamicFontData" id=18]
-[ext_resource path="res://HamsterCage.gd" type="Script" id=19]
-[ext_resource path="res://PressEAgain.gd" type="Script" id=20]
+[ext_resource path="res://assets/images/Hamster/HamsterInWheelRunning6.png" type="Texture" id=16]
+[ext_resource path="res://assets/images/Hamster/HamsterGroundWalking2.png" type="Texture" id=17]
+[ext_resource path="res://assets/images/Hamster/HamsterGroundWalking3.png" type="Texture" id=18]
+[ext_resource path="res://assets/images/StationaryWheel.png" type="Texture" id=19]
+[ext_resource path="res://assets/fonts/kongtext.ttf" type="DynamicFontData" id=20]
+[ext_resource path="res://PressE.gd" type="Script" id=21]
+[ext_resource path="res://PressEAgain.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.6344, 19.8353 )
@@ -29,70 +31,79 @@ extents = Vector2( 17.8028, 18.455 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "Run",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "IdleInWheel",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Run",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 3.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14.049, 27.2083 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 57.7267, 10 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 53.4199, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 256.088, 10 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 9.55063, 63.1914 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 10, 62.3132 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 19
-font_data = ExtResource( 18 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 19
-font_data = ExtResource( 18 )
+font_data = ExtResource( 20 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 19
+font_data = ExtResource( 20 )
 
 [node name="HamsterCage" type="Node2D"]
 position = Vector2( 1, 0 )
-script = ExtResource( 19 )
+script = ExtResource( 1 )
+
+[node name="CageFrontPanel" type="Sprite" parent="."]
+position = Vector2( 400, 300 )
+z_index = 7
+texture = ExtResource( 2 )
 
 [node name="HamsterGameBG" type="Sprite" parent="."]
 position = Vector2( 400, 300 )
-texture = ExtResource( 9 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Wheel" type="KinematicBody2D" parent="."]
 position = Vector2( 401.754, 396.049 )
 scale = Vector2( 0.5, 0.5 )
-script = ExtResource( 5 )
+z_index = 1
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -100,12 +111,12 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Wheel"]
 visible = false
 scale = Vector2( 0.33, 0.33 )
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="Wheel"]
 rotation = -3.14159
 scale = Vector2( 0.33, 0.33 )
-texture = ExtResource( 2 )
+texture = ExtResource( 6 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wheel"]
 visible = false
@@ -134,7 +145,7 @@ shape = SubResource( 2 )
 position = Vector2( 232.744, 495.109 )
 collision_layer = 3
 collision_mask = 3
-script = ExtResource( 4 )
+script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Hamster"]
 frames = SubResource( 3 )
@@ -144,32 +155,37 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hamster"]
 position = Vector2( 2, 5 )
 rotation = 1.5708
-shape = SubResource( 11 )
+shape = SubResource( 4 )
+
+[node name="WheelMountSprite" type="Sprite" parent="."]
+position = Vector2( 402.46, 396.043 )
+scale = Vector2( 0.163597, 0.152368 )
+texture = ExtResource( 19 )
 
 [node name="CageBoundaries" type="StaticBody2D" parent="."]
 visible = false
 
 [node name="NorthWestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 250.542, 439.58 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="NorthEastWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 548.761, 437.478 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="SouthWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 400.51, 560.373 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="EastWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 630.022, 493.398 )
 rotation = -0.453786
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="WestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 166.124, 495.567 )
 rotation = 0.453786
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -185,18 +201,18 @@ __meta__ = {
 margin_left = 248.0
 margin_right = 552.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Press E to mount"
-script = ExtResource( 3 )
+script = ExtResource( 21 )
 
 [node name="PressEAgain" type="Label" parent="HUD/CenterContainer"]
 margin_left = 219.0
 margin_right = 580.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "Press E to dismount"
-script = ExtResource( 20 )
+script = ExtResource( 22 )
 [connection signal="body_entered" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_entered"]
 [connection signal="body_exited" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_exited"]
 [connection signal="body_entered" from="Wheel/ExitBox" to="HUD/CenterContainer/PressEAgain" method="_on_ExitBox_body_entered"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hamstersongv2.wav-92402cdb4e438c90fb69f3e267e6f314.sample"
+
+[deps]
+
+source_file="res://assets/sounds/hamstersongv2.wav"
+dest_files=[ "res://.import/hamstersongv2.wav-92402cdb4e438c90fb69f3e267e6f314.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
