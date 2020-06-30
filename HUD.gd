@@ -7,7 +7,7 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$"CenterContainer/Press E".hide()
+	$"CenterContainer/PressE".hide()
 
 func update_stack(stackSize):
 	$StackLabel.text = str(stackSize)

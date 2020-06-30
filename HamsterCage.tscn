@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://HamsterCage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/HamsterGameBGFrontPanel.png" type="Texture" id=2]
@@ -23,13 +23,7 @@
 [ext_resource path="res://PressE.gd" type="Script" id=21]
 [ext_resource path="res://PressEAgain.gd" type="Script" id=22]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20.6344, 19.8353 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 17.8028, 18.455 )
-
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
@@ -41,24 +35,31 @@ animations = [ {
 "name": "IdleInWheel",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
-"name": "Jump",
-"speed": 5.0
+"name": "Walk",
+"speed": 3.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Run",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
-"name": "Walk",
-"speed": 3.0
+"name": "Jump",
+"speed": 5.0
 } ]
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 9.92017
+height = 35.9613
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 20.6344, 19.8353 )
+
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 14.049, 27.2083 )
+extents = Vector2( 17.8028, 18.455 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 57.7267, 10 )
@@ -75,11 +76,17 @@ extents = Vector2( 9.55063, 63.1914 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 10, 62.3132 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 16.4501, 6.45258 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 16.4727, 6.71729 )
+
+[sub_resource type="DynamicFont" id=12]
 size = 19
 font_data = ExtResource( 20 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 size = 19
 font_data = ExtResource( 20 )
 
@@ -87,17 +94,41 @@ font_data = ExtResource( 20 )
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
 
+[node name="HamsterGameBG" type="Sprite" parent="."]
+position = Vector2( 399, 300 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WheelMountSprite" type="Sprite" parent="."]
+position = Vector2( 402.46, 396.043 )
+scale = Vector2( 0.163597, 0.152368 )
+texture = ExtResource( 19 )
+
 [node name="CageFrontPanel" type="Sprite" parent="."]
 position = Vector2( 400, 300 )
 z_index = 7
 texture = ExtResource( 2 )
 
-[node name="HamsterGameBG" type="Sprite" parent="."]
-position = Vector2( 400, 300 )
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Hamster" type="KinematicBody2D" parent="."]
+position = Vector2( 232.744, 495.109 )
+z_index = 2
+z_as_relative = false
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Hamster"]
+z_index = 1
+frames = SubResource( 1 )
+animation = "Idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hamster"]
+position = Vector2( 2.707, 8.53558 )
+rotation = 1.5708
+shape = SubResource( 2 )
 
 [node name="Wheel" type="KinematicBody2D" parent="."]
 position = Vector2( 401.754, 396.049 )
@@ -132,38 +163,16 @@ polygon = PoolVector2Array( 43, -603, 43, -601.8, 97, -596.8, 97, -595.7, 158, -
 [node name="EnterBox" type="Area2D" parent="Wheel"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/EnterBox"]
-position = Vector2( 0, 235 )
-shape = SubResource( 1 )
+position = Vector2( 0, 220 )
+shape = SubResource( 3 )
 
 [node name="ExitBox" type="Area2D" parent="Wheel"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/ExitBox"]
 position = Vector2( 0, 130 )
-shape = SubResource( 2 )
-
-[node name="Hamster" type="KinematicBody2D" parent="."]
-position = Vector2( 232.744, 495.109 )
-collision_layer = 3
-collision_mask = 3
-script = ExtResource( 7 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Hamster"]
-frames = SubResource( 3 )
-animation = "Idle"
-playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hamster"]
-position = Vector2( 2, 5 )
-rotation = 1.5708
 shape = SubResource( 4 )
 
-[node name="WheelMountSprite" type="Sprite" parent="."]
-position = Vector2( 402.46, 396.043 )
-scale = Vector2( 0.163597, 0.152368 )
-texture = ExtResource( 19 )
-
 [node name="CageBoundaries" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="NorthWestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 250.542, 439.58 )
@@ -187,6 +196,14 @@ position = Vector2( 166.124, 495.567 )
 rotation = 0.453786
 shape = SubResource( 9 )
 
+[node name="LeftLeg" type="CollisionShape2D" parent="CageBoundaries"]
+position = Vector2( 344.577, 488.778 )
+shape = SubResource( 10 )
+
+[node name="RightLeg" type="CollisionShape2D" parent="CageBoundaries"]
+position = Vector2( 460.166, 488.396 )
+shape = SubResource( 11 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD"]
@@ -201,7 +218,7 @@ __meta__ = {
 margin_left = 248.0
 margin_right = 552.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Press E to mount"
 script = ExtResource( 21 )
@@ -210,7 +227,7 @@ script = ExtResource( 21 )
 margin_left = 219.0
 margin_right = 580.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 text = "Press E to dismount"
 script = ExtResource( 22 )
 [connection signal="body_entered" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_entered"]
