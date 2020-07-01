@@ -4,6 +4,8 @@ signal in_wheel
 
 export var min_apm = 1
 export var max_apm = 8
+var rng = RandomNumberGenerator.new()
+var apm
 export var walking_speed = 45
 export var onWheel = false 
 export var velocity = Vector2.ZERO
@@ -16,6 +18,8 @@ var enterBoxLocation = Vector2(400, 500)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
+	apm = rng.randf_range(min_apm, max_apm)
 	$AnimatedSprite.play("walk")
 	$AnimatedSprite.self_modulate = Color(randf()*1, randf()*1, randf()*1)
 
@@ -38,6 +42,9 @@ func _physics_process(delta):
 		_default_physics_process()
 	pass
 	
+func _get_apm():
+	return apm
+
 func _default_physics_process():
 	velocity = position.direction_to(enterBoxLocation) * walking_speed
 	velocity = move_and_slide(velocity)

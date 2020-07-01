@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://HamsterCage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/HamsterGameBGFrontPanel.png" type="Texture" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://assets/images/stereotexture.png" type="Texture" id=27]
 [ext_resource path="res://assets/images/stereotexturonhover.png" type="Texture" id=28]
 [ext_resource path="res://assets/sounds/hamstersongv2.wav" type="AudioStream" id=29]
+[ext_resource path="res://Label.gd" type="Script" id=30]
+[ext_resource path="res://EnemyStatLabel.gd" type="Script" id=31]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -37,25 +39,25 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "Run",
-"speed": 15.0
+"name": "Idle",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "IdleInWheel",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Run",
+"speed": 15.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -314,7 +316,33 @@ texture_click_mask = ExtResource( 26 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerStatLabel" type="Label" parent="."]
+margin_left = 49.3883
+margin_top = 34.7963
+margin_right = 89.3883
+margin_bottom = 48.7963
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "00"
+script = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemyStatLabel" type="Label" parent="."]
+margin_left = 50.5108
+margin_top = 67.9089
+margin_right = 90.5108
+margin_bottom = 81.9089
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "01"
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="rival_stat_report" from="." to="EnemyStatLabel" method="_on_HamsterCage_rival_stat_report"]
 [connection signal="in_wheel" from="Hamster" to="." method="_on_Hamster_in_wheel"]
+[connection signal="stat_report" from="Hamster" to="PlayerStatLabel" method="_on_Hamster_stat_report"]
 [connection signal="body_entered" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_entered"]
 [connection signal="body_exited" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_exited"]
 [connection signal="body_entered" from="Wheel/ExitBox" to="HUD/CenterContainer/PressEAgain" method="_on_ExitBox_body_entered"]

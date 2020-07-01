@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal in_wheel
+signal stat_report(a,b,c)
 
 const UP = Vector2(0, -1)
 const GRAVITY = 10
@@ -18,6 +19,7 @@ var onWheel = false
 var leftKeyNext = true
 var eject = false
 var first = true
+var songSpeed = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +29,9 @@ func _ready():
 
 
 func _physics_process(_delta):
+	songSpeed = $AudioStreamPlayer.get_pitch_scale()
+	emit_signal("stat_report", hamSpeed, wheelSpeed, songSpeed)
+	$AudioStreamPlayer.set_pitch_scale((float(wheelSpeed)/15) + 0.8)
 	if eject:
 		_eject_physics_process()
 	elif onWheel:
@@ -94,7 +99,6 @@ func _wheel_physics_process():
 	elif diff < 0 and self.get_transform().get_rotation() > -1.5:
 		self.rotate(0.01*diff)
 	
-	$AudioStreamPlayer.set_pitch_scale((wheelSpeed/10) + 0.5)
 
 	pass
 	

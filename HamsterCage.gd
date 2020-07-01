@@ -1,5 +1,7 @@
 extends Node2D
 
+signal rival_stat_report(a)
+
 export (PackedScene) var Rival
 
 # Declare member variables here. Examples:
@@ -35,4 +37,5 @@ func _on_SpawnTimer_timeout():
 	yield(t, "timeout")
 	var rival = Rival.instance()
 	add_child(rival)
+	emit_signal("rival_stat_report", rival._get_apm())
 	rival.position = Vector2(550, 500)
