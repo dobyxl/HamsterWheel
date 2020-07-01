@@ -19,7 +19,7 @@ var first = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(600):
+	for i in range(180):
 		apm.append(0)
 	pass
 
@@ -58,7 +58,6 @@ func _default_physics_process():
 
 
 func _wheel_physics_process():
-	motion.y += GRAVITY
 	apm.pop_back()
 		
 	if leftKeyNext:
@@ -77,34 +76,37 @@ func _wheel_physics_process():
 	
 		
 	
-	if hamSpeed == 0:
+	if hamSpeed == 0 and wheelSpeed == 0:
 		$AnimatedSprite.play("IdleInWheel")
 	else:
 		$AnimatedSprite.play("Run")
-	
-	hamSpeed = apm.slice(0, 29, 1).count(1)
-	wheelSpeed = apm.count(1)/20
-	
-	if hamSpeed > wheelSpeed:
-		motion.x = -SPEED/2
-		wheelSpeed = (wheelSpeed+hamSpeed)/2
-	elif hamSpeed < wheelSpeed:
-		motion.x = SPEED
 		
-	motion = move_and_slide(motion, UP, true)
+	var aps = apm.slice(0, 29, 1)
 	
-	self.set_global_rotation(-(self.get_position().x - 400)/69)
+	hamSpeed = aps.count(1)
+	wheelSpeed = apm.count(1)/6
+	var diff = hamSpeed-wheelSpeed
+	
+	if wheelSpeed == 0 and aps.count(1) > 0:
+		wheelSpeed = 1 
+	
+	if diff > 0 and self.get_transform().get_rotation() < 0.75:
+		self.rotate(0.002*diff)
+	elif diff < 0 and self.get_transform().get_rotation() > -1.5:
+		self.rotate(0.01*diff)
+	
+	
 
 	pass
 	
 func _eject_physics_process():
 	if first:
-		motion.y -= 820
+		motion.y -= 500
 		first = false
-	motion.x = 120
+	motion.x = 50
 	$AnimatedSprite.play("Jump")
 	motion.y += GRAVITY
-	self.rotate(0.1)
+	self.rotate(-0.05)
 	motion = move_and_slide(motion, UP)
 	pass
 
@@ -112,15 +114,10 @@ func _eject_physics_process():
 func _on_pressed_e():
 	$AnimatedSprite.play("Jump")
 	($AnimatedSprite as AnimatedSprite).scale.x = 1
-	self.set_global_position(Vector2(399, 465))
+	self.set_global_position(Vector2(400, 395))
+	self.get_node("AnimatedSprite").translate(Vector2(0, 70))
+	self.get_node("CollisionShape2D").translate(Vector2(0, 70))
 	onWheel = true
-	pass
-
-func _on_pressed_e_again():
-	self.set_global_rotation(0)
-	$AnimatedSprite.play("Jump")
-	self.set_global_position(Vector2(400, 500))
-	onWheel = false
 	pass
 	
 func is_On_Wheel():

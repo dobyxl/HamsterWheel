@@ -30,25 +30,25 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "IdleInWheel",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 3.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Run",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 5.0
+"name": "Walk",
+"speed": 3.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -61,35 +61,35 @@ extents = Vector2( 20.6344, 19.8353 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 17.8028, 18.455 )
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=5]
 radius = 22.0847
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 57.7267, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 53.4199, 10 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 256.088, 10 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 9.55063, 63.1914 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 10, 62.3132 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 16.4501, 6.45258 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 16.4727, 6.71729 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=13]
 size = 19
 font_data = ExtResource( 20 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=14]
 size = 19
 font_data = ExtResource( 20 )
 
@@ -105,7 +105,7 @@ __meta__ = {
 }
 
 [node name="WheelMountSprite" type="Sprite" parent="."]
-position = Vector2( 402.46, 396.043 )
+position = Vector2( 400.46, 395.043 )
 scale = Vector2( 0.163597, 0.152368 )
 texture = ExtResource( 19 )
 
@@ -134,7 +134,7 @@ rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="Wheel" type="KinematicBody2D" parent="."]
-position = Vector2( 401.754, 396.049 )
+position = Vector2( 400, 395 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
 script = ExtResource( 4 )
@@ -169,46 +169,49 @@ shape = SubResource( 3 )
 [node name="ExitBox" type="Area2D" parent="Wheel"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/ExitBox"]
-position = Vector2( 0, 130 )
+position = Vector2( 0, 140 )
 shape = SubResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Area2D" type="Area2D" parent="Wheel"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/Area2D"]
-position = Vector2( 153.235, 33.8542 )
-shape = SubResource( 14 )
+position = Vector2( 151.975, -8.98314 )
+shape = SubResource( 5 )
 
 [node name="CageBoundaries" type="StaticBody2D" parent="."]
 
 [node name="NorthWestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 250.542, 439.58 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="NorthEastWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 548.761, 438.538 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="SouthWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 400.51, 560.373 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="EastWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 630.022, 493.398 )
 rotation = -0.453786
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="WestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 166.124, 495.567 )
 rotation = 0.453786
-shape = SubResource( 9 )
-
-[node name="LeftLeg" type="CollisionShape2D" parent="CageBoundaries"]
-position = Vector2( 344.577, 488.778 )
 shape = SubResource( 10 )
 
-[node name="RightLeg" type="CollisionShape2D" parent="CageBoundaries"]
-position = Vector2( 460.166, 488.396 )
+[node name="LeftLeg" type="CollisionShape2D" parent="CageBoundaries"]
+position = Vector2( 342.704, 488.029 )
 shape = SubResource( 11 )
+
+[node name="RightLeg" type="CollisionShape2D" parent="CageBoundaries"]
+position = Vector2( 458.293, 488.396 )
+shape = SubResource( 12 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -224,7 +227,7 @@ __meta__ = {
 margin_left = 248.0
 margin_right = 552.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Press E to mount"
 script = ExtResource( 21 )
@@ -233,7 +236,7 @@ script = ExtResource( 21 )
 margin_left = 58.0
 margin_right = 742.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Alternate Left & Right Arrows to run"
 script = ExtResource( 22 )
 [connection signal="body_entered" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_entered"]

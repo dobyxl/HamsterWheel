@@ -15,18 +15,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if self.is_visible() && Input.is_action_just_pressed("ui_left"):
-		self.hide()
 	pass
 
 
 func _on_ExitBox_body_entered(body):
 	if !shownOnce:
 		self.show()
-		shownOnce = true
 	pass # Replace with function body.
 
 
 func _on_ExitBox_body_exited(body):
 	self.hide()
+	shownOnce = true
 	pass # Replace with function body.
