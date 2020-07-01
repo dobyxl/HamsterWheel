@@ -37,16 +37,6 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "IdleInWheel",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Run",
@@ -56,6 +46,16 @@ animations = [ {
 "loop": true,
 "name": "Walk",
 "speed": 3.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "IdleInWheel",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -321,3 +321,4 @@ __meta__ = {
 [connection signal="body_exited" from="Wheel/ExitBox" to="HUD/CenterContainer/PressEAgain" method="_on_ExitBox_body_exited"]
 [connection signal="body_entered" from="Wheel/Area2D" to="Hamster" method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="pressed" from="TextureButton" to="Hamster" method="_on_TextureButton_pressed"]

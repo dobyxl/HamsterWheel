@@ -94,7 +94,7 @@ func _wheel_physics_process():
 	elif diff < 0 and self.get_transform().get_rotation() > -1.5:
 		self.rotate(0.01*diff)
 	
-#	$AudioStreamPlayer.set_pitch_scale() to implement, changing music based on wheel speed
+	$AudioStreamPlayer.set_pitch_scale((wheelSpeed/10) + 0.5)
 
 	pass
 	
@@ -132,3 +132,10 @@ func get_wheelSpeed():
 func _on_Area2D_body_entered(_body):
 	eject = true
 	pass # Replace with function body.
+
+
+func _on_TextureButton_pressed():
+	if $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer.stop()
+	else:
+		$AudioStreamPlayer.play()
