@@ -1,5 +1,6 @@
 extends Node2D
 
+export (PackedScene) var Rival
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -20,3 +21,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func _on_Hamster_in_wheel():
+	$SpawnTimer.start()
+
+func _on_SpawnTimer_timeout():
+	$HandControl/AnimationPlayer.play("SpawnAnimation")
+	var t = Timer.new()
+	t.set_wait_time(1)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	var rival = Rival.instance()
+	add_child(rival)
+	rival.position = Vector2(550, 500)

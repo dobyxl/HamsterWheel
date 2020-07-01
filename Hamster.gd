@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal in_wheel
+
 const UP = Vector2(0, -1)
 const GRAVITY = 10
 const SPEED = 40
@@ -73,9 +75,6 @@ func _wheel_physics_process():
 		else:
 			apm.push_front(0)
 	
-	
-		
-	
 	if hamSpeed == 0 and wheelSpeed == 0:
 		$AnimatedSprite.play("IdleInWheel")
 	else:
@@ -95,7 +94,7 @@ func _wheel_physics_process():
 	elif diff < 0 and self.get_transform().get_rotation() > -1.5:
 		self.rotate(0.01*diff)
 	
-	
+#	$AudioStreamPlayer.set_pitch_scale() to implement, changing music based on wheel speed
 
 	pass
 	
@@ -118,6 +117,8 @@ func _on_pressed_e():
 	self.get_node("AnimatedSprite").translate(Vector2(0, 70))
 	self.get_node("CollisionShape2D").translate(Vector2(0, 70))
 	onWheel = true
+	emit_signal("in_wheel")
+	$AudioStreamPlayer.play()
 	pass
 	
 func is_On_Wheel():

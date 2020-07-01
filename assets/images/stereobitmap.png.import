@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/stereobitmap.png-bc9973cc4b866896b5bdca7fa4993d06.res"
+
+[deps]
+
+source_file="res://assets/images/stereobitmap.png"
+dest_files=[ "res://.import/stereobitmap.png-bc9973cc4b866896b5bdca7fa4993d06.res" ]
+
+[params]
+
+create_from=0
+threshold=0.08

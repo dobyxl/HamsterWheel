@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stereo.png-65927c96011add4c075a447644201f67.stex"
+path="res://.import/stereotexture.png-0c41ccc93484e897cc0fc8f7077a58d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/stereo.png"
-dest_files=[ "res://.import/stereo.png-65927c96011add4c075a447644201f67.stex" ]
+source_file="res://assets/images/stereotexture.png"
+dest_files=[ "res://.import/stereotexture.png-0c41ccc93484e897cc0fc8f7077a58d7.stex" ]
 
 [params]
 

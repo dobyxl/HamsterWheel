@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://HamsterCage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/HamsterGameBGFrontPanel.png" type="Texture" id=2]
@@ -22,6 +22,13 @@
 [ext_resource path="res://assets/fonts/kongtext.ttf" type="DynamicFontData" id=20]
 [ext_resource path="res://PressE.gd" type="Script" id=21]
 [ext_resource path="res://HowToMove.gd" type="Script" id=22]
+[ext_resource path="res://RivalHamster.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/images/HandOpen.png" type="Texture" id=24]
+[ext_resource path="res://assets/images/HandClosed.png" type="Texture" id=25]
+[ext_resource path="res://assets/images/stereobitmap.png" type="BitMap" id=26]
+[ext_resource path="res://assets/images/stereotexture.png" type="Texture" id=27]
+[ext_resource path="res://assets/images/stereotexturonhover.png" type="Texture" id=28]
+[ext_resource path="res://assets/sounds/hamstersongv2.wav" type="AudioStream" id=29]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -93,9 +100,38 @@ font_data = ExtResource( 20 )
 size = 19
 font_data = ExtResource( 20 )
 
+[sub_resource type="Animation" id=15]
+resource_name = "SpawnAnimation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -550 ), Vector2( 0, 0 ), Vector2( 0, -550 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 24 ), ExtResource( 25 ) ]
+}
+
 [node name="HamsterCage" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
+Rival = ExtResource( 23 )
 
 [node name="HamsterGameBG" type="Sprite" parent="."]
 position = Vector2( 399, 300 )
@@ -132,6 +168,10 @@ playing = true
 position = Vector2( 2.707, 8.53558 )
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Hamster"]
+stream = ExtResource( 29 )
+volume_db = -18.301
 
 [node name="Wheel" type="KinematicBody2D" parent="."]
 position = Vector2( 400, 395 )
@@ -239,8 +279,45 @@ margin_bottom = 20.0
 custom_fonts/font = SubResource( 14 )
 text = "Alternate Left & Right Arrows to run"
 script = ExtResource( 22 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="HandControl" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HandControl"]
+margin_top = -550.0
+margin_right = 800.0
+margin_bottom = 50.0
+texture = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HandControl"]
+anims/SpawnAnimation = SubResource( 15 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 512.965
+margin_top = 239.084
+margin_right = 812.965
+margin_bottom = 539.084
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 28 )
+texture_click_mask = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="in_wheel" from="Hamster" to="." method="_on_Hamster_in_wheel"]
 [connection signal="body_entered" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_entered"]
 [connection signal="body_exited" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_exited"]
 [connection signal="body_entered" from="Wheel/ExitBox" to="HUD/CenterContainer/PressEAgain" method="_on_ExitBox_body_entered"]
 [connection signal="body_exited" from="Wheel/ExitBox" to="HUD/CenterContainer/PressEAgain" method="_on_ExitBox_body_exited"]
 [connection signal="body_entered" from="Wheel/Area2D" to="Hamster" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
