@@ -89,16 +89,16 @@ func _wheel_physics_process():
 	
 	hamSpeed = aps.count(1)
 	wheelSpeed = apm.count(1)/6
-	var diff = hamSpeed-wheelSpeed
+	
+	var diff = hamSpeed-self.get_parent()._get_wheelIndex()
 	
 	if wheelSpeed == 0 and aps.count(1) > 0:
 		wheelSpeed = 1 
 	
 	if diff > 0 and self.get_transform().get_rotation() < 0.75:
-		self.rotate(0.002*diff)
+		self.rotate(0.005*diff)
 	elif diff < 0 and self.get_transform().get_rotation() > -1.5:
 		self.rotate(0.01*diff)
-	
 
 	pass
 	
@@ -106,7 +106,7 @@ func _eject_physics_process():
 	if first:
 		motion.y -= 500
 		first = false
-	motion.x = 50
+	motion.x += GRAVITY
 	$AnimatedSprite.play("Jump")
 	motion.y += GRAVITY
 	self.rotate(-0.05)

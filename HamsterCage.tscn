@@ -340,9 +340,12 @@ script = ExtResource( 31 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="rival_onWheel" from="." to="Wheel" method="_on_HamsterCage_rival_onWheel"]
+[connection signal="rival_stat_report" from="." to="Wheel" method="_on_HamsterCage_rival_stat_report"]
 [connection signal="rival_stat_report" from="." to="EnemyStatLabel" method="_on_HamsterCage_rival_stat_report"]
 [connection signal="in_wheel" from="Hamster" to="." method="_on_Hamster_in_wheel"]
 [connection signal="stat_report" from="Hamster" to="PlayerStatLabel" method="_on_Hamster_stat_report"]
+[connection signal="wheelIndex" from="Wheel" to="." method="_on_Wheel_wheelIndex"]
 [connection signal="body_entered" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_entered"]
 [connection signal="body_exited" from="Wheel/EnterBox" to="HUD/CenterContainer/PressE" method="_on_EnterBox_body_exited"]
 [connection signal="body_entered" from="Wheel/ExitBox" to="HUD/CenterContainer/PressEAgain" method="_on_ExitBox_body_entered"]

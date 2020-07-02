@@ -47,6 +47,8 @@ height = 34.7686
 
 [node name="RivalHamster" type="KinematicBody2D"]
 position = Vector2( 682.186, 487.729 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
