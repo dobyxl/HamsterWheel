@@ -44,24 +44,24 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 3.0
-}, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Run",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "IdleInWheel",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 5.0
 } ]
 
@@ -69,7 +69,7 @@ animations = [ {
 radius = 9.92017
 height = 35.9613
 
-[sub_resource type="SpriteFrames" id=16]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [  ],
 "loop": true,
@@ -82,46 +82,45 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 20.6344, 19.8353 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 17.8028, 18.455 )
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=6]
 radius = 22.0847
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 57.7267, 10 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 53.4199, 10 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 256.088, 10 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 9.55063, 63.1914 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 10, 62.3132 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 16.4501, 6.45258 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 16.4727, 6.71729 )
-
-[sub_resource type="DynamicFont" id=13]
-size = 19
-font_data = ExtResource( 20 )
 
 [sub_resource type="DynamicFont" id=14]
 size = 19
 font_data = ExtResource( 20 )
 
-[sub_resource type="Animation" id=15]
-resource_name = "SpawnAnimation"
+[sub_resource type="DynamicFont" id=15]
+size = 19
+font_data = ExtResource( 20 )
+
+[sub_resource type="Animation" id=16]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureRect:rect_position")
@@ -200,9 +199,9 @@ volume_db = -18.301
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Hamster/AudioStreamPlayer"]
 position = Vector2( 690, 340 )
 scale = Vector2( 0.7, 0.7 )
-frames = SubResource( 16 )
+frames = SubResource( 3 )
 animation = "playingAnim"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Wheel" type="KinematicBody2D" parent="."]
@@ -236,13 +235,13 @@ polygon = PoolVector2Array( 43, -603, 43, -601.8, 97, -596.8, 97, -595.7, 158, -
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/EnterBox"]
 position = Vector2( 0, 220 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="ExitBox" type="Area2D" parent="Wheel"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/ExitBox"]
 position = Vector2( 0, 140 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -251,39 +250,39 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wheel/Area2D"]
 position = Vector2( 151.975, -8.98314 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CageBoundaries" type="StaticBody2D" parent="."]
 
 [node name="NorthWestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 250.542, 439.58 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="NorthEastWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 548.761, 438.538 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="SouthWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 400.51, 560.373 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="EastWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 630.022, 493.398 )
 rotation = -0.453786
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="WestWall" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 166.124, 495.567 )
 rotation = 0.453786
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="LeftLeg" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 342.704, 488.029 )
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="RightLeg" type="CollisionShape2D" parent="CageBoundaries"]
 position = Vector2( 458.293, 488.396 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -299,8 +298,8 @@ __meta__ = {
 margin_left = 248.0
 margin_right = 552.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 13 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0.427451, 0.65098, 0.682353, 1 )
 text = "Press E to mount"
 script = ExtResource( 21 )
 
@@ -308,7 +307,8 @@ script = ExtResource( 21 )
 margin_left = 58.0
 margin_right = 742.0
 margin_bottom = 20.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 15 )
+custom_colors/font_color = Color( 0.427451, 0.65098, 0.682353, 1 )
 text = "Alternate Left & Right Arrows to run"
 script = ExtResource( 22 )
 
@@ -333,7 +333,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HandControl"]
-anims/SpawnAnimation = SubResource( 15 )
+anims/SpawnAnimation = SubResource( 16 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
 margin_left = 512.965
@@ -348,6 +348,7 @@ __meta__ = {
 }
 
 [node name="PlayerStatLabel" type="Label" parent="."]
+visible = false
 margin_left = 49.3883
 margin_top = 34.7963
 margin_right = 89.3883
@@ -360,6 +361,7 @@ __meta__ = {
 }
 
 [node name="EnemyStatLabel" type="Label" parent="."]
+visible = false
 margin_left = 50.5108
 margin_top = 67.9089
 margin_right = 90.5108
@@ -371,21 +373,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScoreLabel" type="Label" parent="."]
-margin_left = 9.28101
-margin_top = 13.8807
-margin_right = 85.281
-margin_bottom = 50.8807
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_top = 554.0
+margin_right = 800.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer"]
+margin_left = 400.0
+margin_top = 13.0
+margin_right = 400.0
+margin_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
 custom_fonts/font = SubResource( 17 )
-custom_colors/font_color = Color( 0.901961, 0.513726, 0.658824, 1 )
+custom_colors/font_color = Color( 0.964706, 0.917647, 0.784314, 1 )
+align = 1
+valign = 1
 script = ExtResource( 36 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="rival_onWheel" from="." to="Wheel" method="_on_HamsterCage_rival_onWheel"]
-[connection signal="rival_stat_report" from="." to="EnemyStatLabel" method="_on_HamsterCage_rival_stat_report"]
 [connection signal="rival_stat_report" from="." to="Wheel" method="_on_HamsterCage_rival_stat_report"]
-[connection signal="scoreChange" from="." to="ScoreLabel" method="_on_HamsterCage_scoreChange"]
+[connection signal="rival_stat_report" from="." to="EnemyStatLabel" method="_on_HamsterCage_rival_stat_report"]
+[connection signal="scoreChange" from="." to="CenterContainer/ScoreLabel" method="_on_HamsterCage_scoreChange"]
 [connection signal="game_over" from="Hamster" to="." method="_on_Hamster_game_over"]
 [connection signal="in_wheel" from="Hamster" to="." method="_on_Hamster_in_wheel"]
 [connection signal="stat_report" from="Hamster" to="PlayerStatLabel" method="_on_Hamster_stat_report"]

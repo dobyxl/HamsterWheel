@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://EndScreen.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/HamsterGameBG.png" type="Texture" id=2]
@@ -28,6 +28,23 @@ font_data = ExtResource( 3 )
 size = 19
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 19
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 19
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.47451, 0.458824, 0.454902, 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 19
+font_data = ExtResource( 3 )
+
 [node name="EndScreen" type="TextureRect"]
 margin_right = 800.0
 margin_bottom = 599.0
@@ -42,16 +59,19 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -199.5
-margin_top = -84.0
-margin_right = 199.5
-margin_bottom = -44.0
+margin_left = -315.631
+margin_top = -269.543
+margin_right = 83.369
+margin_bottom = -229.543
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.960938, 0.0156888, 0.707334, 1 )
 text = "Thank you for playing"
@@ -60,10 +80,9 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 219.455, 226.352 )
+position = Vector2( 100.654, 2.09894 )
 scale = Vector2( 0.45, 0.45 )
 frames = SubResource( 2 )
-frame = 2
 playing = true
 centered = false
 
@@ -106,53 +125,52 @@ margin_right = 209.0
 margin_bottom = -12.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.104034, 0.613266, 0.679688, 1 )
-text = "Press SPACE to restart"
+text = "Press escape to restart"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameDialog" type="Panel" parent="."]
-margin_left = 59.33
-margin_top = 24.3676
-margin_right = 268.33
-margin_bottom = 204.368
+[node name="NameDialog" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -218.0
+margin_top = -296.19
+margin_right = 219.0
+margin_bottom = -156.19
+custom_constants/separation = 20
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="WhatsYourName" type="RichTextLabel" parent="NameDialog"]
-margin_left = 10.2973
-margin_top = 21.4376
-margin_right = 197.297
-margin_bottom = 50.4376
-text = "Please Enter Your Name"
+[node name="WhatsYourName" type="Label" parent="NameDialog"]
+margin_right = 437.0
+margin_bottom = 20.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.494118, 0.470588, 0.615686, 1 )
+text = "Please Enter Your Name:"
 
 [node name="NameInput" type="LineEdit" parent="NameDialog"]
-margin_left = 5.29733
-margin_top = 66.7462
-margin_right = 212.297
-margin_bottom = 105.746
-text = "YourNameHere"
+margin_top = 40.0
+margin_right = 437.0
+margin_bottom = 60.0
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.470588, 0.741176, 0.776471, 1 )
+text = "Your Name Here"
+align = 1
 
 [node name="SubmitScoreButton" type="Button" parent="NameDialog"]
-margin_left = 72.5732
-margin_top = 128.195
-margin_right = 129.573
-margin_bottom = 148.195
-text = "Submit"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShowLB" type="Button" parent="."]
-margin_left = 637.267
-margin_top = 198.649
-margin_right = 766.267
-margin_bottom = 218.649
-text = "Show LeaderBoard"
+margin_top = 80.0
+margin_right = 437.0
+margin_bottom = 100.0
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.847059, 0.756863, 0.815686, 1 )
+text = "Submit Score"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="NameDialog/SubmitScoreButton" to="." method="_on_SubmitScoreButton_pressed"]
-[connection signal="pressed" from="ShowLB" to="." method="_on_ShowLB_pressed"]

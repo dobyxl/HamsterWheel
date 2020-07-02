@@ -28,6 +28,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 centered = false
 
@@ -37,6 +38,7 @@ margin_top = 445.0
 margin_right = 558.115
 margin_bottom = 556.006
 custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.678431, 0.101961, 0.478431, 1 )
 text = "Press SPACE to start"
 align = 1
 valign = 1
