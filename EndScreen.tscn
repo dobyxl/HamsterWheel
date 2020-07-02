@@ -110,3 +110,49 @@ text = "Press SPACE to restart"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NameDialog" type="Panel" parent="."]
+margin_left = 59.33
+margin_top = 24.3676
+margin_right = 268.33
+margin_bottom = 204.368
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="WhatsYourName" type="RichTextLabel" parent="NameDialog"]
+margin_left = 10.2973
+margin_top = 21.4376
+margin_right = 197.297
+margin_bottom = 50.4376
+text = "Please Enter Your Name"
+
+[node name="NameInput" type="LineEdit" parent="NameDialog"]
+margin_left = 5.29733
+margin_top = 66.7462
+margin_right = 212.297
+margin_bottom = 105.746
+text = "YourNameHere"
+
+[node name="SubmitScoreButton" type="Button" parent="NameDialog"]
+margin_left = 72.5732
+margin_top = 128.195
+margin_right = 129.573
+margin_bottom = 148.195
+text = "Submit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShowLB" type="Button" parent="."]
+margin_left = 637.267
+margin_top = 198.649
+margin_right = 766.267
+margin_bottom = 218.649
+text = "Show LeaderBoard"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="NameDialog/SubmitScoreButton" to="." method="_on_SubmitScoreButton_pressed"]
+[connection signal="pressed" from="ShowLB" to="." method="_on_ShowLB_pressed"]
