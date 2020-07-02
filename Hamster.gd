@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+signal game_over
 signal in_wheel
 signal stat_report(a,b,c)
 
@@ -29,9 +30,16 @@ func _ready():
 
 
 func _physics_process(_delta):
+	
+	if $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer/AnimatedSprite.play("playingAnim")
+	else:
+		$AudioStreamPlayer/AnimatedSprite.play("notplayingAnim")
+		
 	songSpeed = $AudioStreamPlayer.get_pitch_scale()
 	emit_signal("stat_report", hamSpeed, wheelSpeed, songSpeed)
 	$AudioStreamPlayer.set_pitch_scale((float(wheelSpeed)/15) + 0.8)
+	
 	if eject:
 		_eject_physics_process()
 	elif onWheel:
@@ -111,6 +119,16 @@ func _eject_physics_process():
 	motion.y += GRAVITY
 	self.rotate(-0.05)
 	motion = move_and_slide(motion, UP)
+	
+	var t = Timer.new()
+	t.set_wait_time(2)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	
+	emit_signal("game_over")
+	
 	pass
 
 

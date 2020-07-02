@@ -2,6 +2,7 @@ extends Node2D
 
 signal rival_stat_report(a)
 signal rival_onWheel(w)
+signal scoreChange(d)
 
 export (PackedScene) var Rival
 var rival
@@ -10,11 +11,11 @@ var rivalOnWheel = false
 var wheelIndex = 0
 var minAPM = 1
 var maxAPM = 3
+var playerScore = -1
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,6 +50,8 @@ func _on_Hamster_in_wheel():
 	$SpawnTimer.start()
 
 func _on_SpawnTimer_timeout():
+	playerScore += 1
+	emit_signal("scoreChange", playerScore)
 	$HandControl/AnimationPlayer.play("SpawnAnimation")
 	var t = Timer.new()
 	t.set_wait_time(1)
@@ -67,3 +70,7 @@ func _on_SpawnTimer_timeout():
 func _on_Wheel_wheelIndex(i):
 	wheelIndex = i
 	pass # Replace with function body.
+
+
+func _on_Hamster_game_over():
+	get_tree().change_scene("res://EndScreen.tscn")

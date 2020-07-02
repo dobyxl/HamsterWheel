@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://HamsterCage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/HamsterGameBGFrontPanel.png" type="Texture" id=2]
@@ -31,6 +31,11 @@
 [ext_resource path="res://assets/sounds/hamstersongv2.wav" type="AudioStream" id=29]
 [ext_resource path="res://Label.gd" type="Script" id=30]
 [ext_resource path="res://EnemyStatLabel.gd" type="Script" id=31]
+[ext_resource path="res://assets/images/SoundBarsFrame2.png" type="Texture" id=32]
+[ext_resource path="res://assets/images/SoundBarsFrame3.png" type="Texture" id=33]
+[ext_resource path="res://assets/images/SoundBarsFrame0.png" type="Texture" id=34]
+[ext_resource path="res://assets/images/SoundBarsFrame1.png" type="Texture" id=35]
+[ext_resource path="res://ScoreLabel.gd" type="Script" id=36]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -39,30 +44,43 @@ animations = [ {
 "name": "Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "IdleInWheel",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "Run",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "IdleInWheel",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 9.92017
 height = 35.9613
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "notplayingAnim",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 34 ), ExtResource( 35 ), ExtResource( 32 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "playingAnim",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20.6344, 19.8353 )
@@ -130,6 +148,10 @@ tracks/1/keys = {
 "values": [ ExtResource( 24 ), ExtResource( 25 ) ]
 }
 
+[sub_resource type="DynamicFont" id=17]
+size = 19
+font_data = ExtResource( 20 )
+
 [node name="HamsterCage" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
@@ -174,6 +196,14 @@ shape = SubResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Hamster"]
 stream = ExtResource( 29 )
 volume_db = -18.301
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Hamster/AudioStreamPlayer"]
+position = Vector2( 690, 340 )
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 16 )
+animation = "playingAnim"
+frame = 3
+playing = true
 
 [node name="Wheel" type="KinematicBody2D" parent="."]
 position = Vector2( 400, 395 )
@@ -340,9 +370,23 @@ script = ExtResource( 31 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 9.28101
+margin_top = 13.8807
+margin_right = 85.281
+margin_bottom = 50.8807
+custom_fonts/font = SubResource( 17 )
+custom_colors/font_color = Color( 0.901961, 0.513726, 0.658824, 1 )
+script = ExtResource( 36 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="rival_onWheel" from="." to="Wheel" method="_on_HamsterCage_rival_onWheel"]
-[connection signal="rival_stat_report" from="." to="Wheel" method="_on_HamsterCage_rival_stat_report"]
 [connection signal="rival_stat_report" from="." to="EnemyStatLabel" method="_on_HamsterCage_rival_stat_report"]
+[connection signal="rival_stat_report" from="." to="Wheel" method="_on_HamsterCage_rival_stat_report"]
+[connection signal="scoreChange" from="." to="ScoreLabel" method="_on_HamsterCage_scoreChange"]
+[connection signal="game_over" from="Hamster" to="." method="_on_Hamster_game_over"]
 [connection signal="in_wheel" from="Hamster" to="." method="_on_Hamster_in_wheel"]
 [connection signal="stat_report" from="Hamster" to="PlayerStatLabel" method="_on_Hamster_stat_report"]
 [connection signal="wheelIndex" from="Wheel" to="." method="_on_Wheel_wheelIndex"]

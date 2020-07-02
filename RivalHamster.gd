@@ -23,7 +23,7 @@ func _ready():
 	min_apm = self.get_parent()._get_minAPM()
 	max_apm = self.get_parent()._get_maxAPM()
 	apm = rng.randf_range(min_apm, max_apm)
-	$AnimatedSprite.play("walk")
+	$AnimatedSprite.play("Walk")
 	$AnimatedSprite.self_modulate = Color(randf()*1, randf()*1, randf()*1)
 
 
